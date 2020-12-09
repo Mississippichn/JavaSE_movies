@@ -13,6 +13,25 @@ public class ScannerUtill {
      private static Scanner scanner=new Scanner(System.in);
 
     /**
+     * 读取指定长度的整数
+     * @return
+     */
+     public static int readInt(){
+         String str_int = readKeyboard(2, false);
+         int i=0;
+         while (true){
+             try{
+                 i = Integer.parseInt(str_int);
+             }catch (Exception e){
+                 System.out.println("序号类型输入有误，请重新输入");
+                 continue;
+             }
+            break;
+         }
+         return i;
+     }
+
+    /**
      * 读上映日期（一个指定格式的类型）的方法
      * @param pattern 指定的日期类型
      * @return date
@@ -34,6 +53,34 @@ public class ScannerUtill {
      }
 
     /**
+     * 读上映日期（一个指定格式的类型）的方法
+     * @param pattern 指定的日期类型
+     * @return date
+     */
+    public static Date readDate(String pattern, Date defalutValue){
+        Date date;
+        while (true){
+            String date_str = readKeyboard(pattern.length(),true);//从键盘返回的日期
+            if (date_str.equals("")){
+                return defalutValue;
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);//格式就是我们在提示中给用户固定的格式
+            try {
+                date=sdf.parse(date_str);//解析输入的pattern格式的日期
+            } catch (ParseException e) {//这个异常来自于输入的日期格式不对
+                System.out.println("时间格式输入有误，请重新输入");
+                continue;
+            }
+            break;
+        }
+        return date;
+    }
+
+
+
+
+
+    /**
      *从控制台读入一个字符串
      * @param limit 指定最大长度
      * @return
@@ -41,6 +88,21 @@ public class ScannerUtill {
      public static String readString(int limit){
          return readKeyboard(limit,false);
      }
+
+    /**
+     * 从控制台读入一个字符串，为空则返回默认值
+     * @param limit
+     * @param defaultValue 直接敲回车返回的默认值
+     * @return String
+     */
+
+    public static String readString(int limit,String defaultValue){
+        String s1 = readKeyboard(limit, true);
+        return s1.equals("")?defaultValue:s1;
+    }
+
+
+
 
     /**
      * 从控制台输入选择的值
