@@ -9,8 +9,8 @@ public class Movie {
     private String actor;
     private Date date;//上映时间
     private String director;
-    private int clickRate;//点击率
-    private int recoRate;//推荐率
+    private int clickRate;//点击率 默认值为0
+    private int recoRate;//推荐率 默认值为0
 
     public Movie() {
     }
